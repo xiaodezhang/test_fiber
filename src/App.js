@@ -1,5 +1,6 @@
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useLoader } from '@react-three/fiber'
 import { useGLTF, useTexture, Decal, Environment, OrbitControls, RandomizedLight, AccumulativeShadows } from '@react-three/drei'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 export const App = () => (
   <Canvas shadows camera={{ position: [2, 2, 10], fov: 20 }}>
@@ -17,15 +18,19 @@ export const App = () => (
 )
 
 function Bun(props) {
-  const { nodes } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/bunny/model.gltf')
+  // const { nodes } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/bunny/model.gltf')
+  // const { nodes } = useGLTF('/scene.gltf')
+  // return (
+  //   <mesh castShadow receiveShadow geometry={nodes.bunny.geometry} {...props} dispose={null}>
+  //   </mesh>
+  // )
+  const { nodes, materials } = useGLTF('/scene-transformed.glb')
   return (
-    <mesh castShadow receiveShadow geometry={nodes.bunny.geometry} {...props} dispose={null}>
-      <meshStandardMaterial color="black" />
-      <Sticker url="/Sticjer_1024x1024@2x.png" position={[-0.1, 1.3, 0.55]} rotation={Math.PI * 1.2} scale={0.45} />
-      <Sticker url="/Twemoji_1f600.svg.png" position={[0.4, 1, 0.55]} rotation={Math.PI * 0.9} scale={0.3} />
-      <Sticker url="/D64aIWkXoAAFI08.png" position={[0, 0.7, 0.85]} rotation={Math.PI * 1.2} scale={0.35} />
-      <Sticker url="/three.png" position={[-0.54, 1.1, 0.57]} rotation={-1.2} scale={0.2} />
-    </mesh>
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Object_4.geometry} material={materials.PaletteMaterial001} position={[0, 2.715, 0]} >
+      <Sticker url="/Sticjer_1024x1024@2x.png" position={[0.3, 0.5, 0.25]} rotation={Math.PI * 5.2} scale={0.45} />
+      </mesh>
+    </group>
   )
 }
 
