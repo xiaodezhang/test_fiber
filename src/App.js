@@ -16,7 +16,7 @@ export const App = () => (
         <RandomizedLight amount={8} radius={10} ambient={0.5} position={[2.5, 5, -5]} bias={0.001} />
       </AccumulativeShadows>
     </group>
-    <Environment preset="city" background blur={0.7} />
+    <Environment files="/potsdamer_platz_1k.hdr" background blur={0.7} />
     <OrbitControls makeDefault />
   </Canvas>
 )
